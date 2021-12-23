@@ -167,7 +167,7 @@ def category(request,value):
         stuff=[cat.category for cat in request.user.following.all()]
     else:
         stuff=[]
-    response=requests.get(f"https://newsapi.org/v2/top-headlines?category={value}&country=us&apiKey={settings.API_KEY}")
+    response=requests.get(f"https://newsapi.org/v2/top-headlines?category={value}&country=in&apiKey={settings.API_KEY}")
     if response.json()["status"]!="ok":
         return render(request,"news/category.html",{"articles":None,"stuff":stuff,"code":response.json()["code"],"message":response.json()["message"],"name":value.capitalize()})
 
@@ -198,7 +198,7 @@ def feed(request):
 
     articles=[]
     for category in categories:
-        response=requests.get(f"https://newsapi.org/v2/top-headlines?category={category}&country=us&pageSize=10&apiKey={settings.API_KEY}")
+        response=requests.get(f"https://newsapi.org/v2/top-headlines?category={category}&country=in&pageSize=10&apiKey={settings.API_KEY}")
         if response.json()["status"]!="ok":
             continue
         articles.extend(response.json()["articles"])
