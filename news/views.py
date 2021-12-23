@@ -77,8 +77,9 @@ def home(request):
         stuff=[cat.category for cat in request.user.following.all()]
     else:
         stuff=[]
-    if flag<1:
+    if request.session.get('flag',0)<1:
         response=requests.get(f"https://newsapi.org/v2/top-headlines?country=in&apiKey={settings.API_KEY}")
+        request.session['flag']=1
         if response.json()["status"]!="ok":
             return render(request,"news/home.html",{"articles":None,"stuff":stuff,"code":response.json()["code"],
             "message":response.json()["message"]})
@@ -88,6 +89,7 @@ def home(request):
     paginator = Paginator(testjson, 4)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
+    request.session.set_expiry(300)
     return render(request,"news/home.html",{"articles":page_obj,"stuff":stuff})
 
 
