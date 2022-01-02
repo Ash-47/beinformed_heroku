@@ -89,7 +89,7 @@ def home(request):
     paginator = Paginator(testjson, 4)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
-    request.session.set_expiry(300)
+    #request.session.set_expiry(300)
     return render(request,"news/home.html",{"articles":page_obj,"stuff":stuff})
 
 
