@@ -1,4 +1,4 @@
-#BeInformed
+# BeInformed
 
 BeInformed is a news delivery site that uses NewsAPI in the background to provide latest breaking news from major news service providers across the globe.
 - NewsAPI helps serve the latest breaking news onto the site
